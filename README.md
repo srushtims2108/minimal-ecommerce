@@ -12,6 +12,7 @@ A minimal and modern full-stack e-commerce web application built with **Next.js 
 - 💳 Razorpay integration for secure checkout
 - 📧 Order confirmation email after successful payment
 - 🧾 Order summary and success page
+
 - 🔐 Protected purchase access for authenticated users
 - 🐳 Fully Dockerized (MongoDB + App)
 
@@ -36,12 +37,16 @@ A minimal and modern full-stack e-commerce web application built with **Next.js 
 ```bash
 git clone https://github.com/YOUR_USERNAME/minimal-ecommerce.git
 cd minimal-ecommerce
-2. Install dependencies
+
+### 2. Install dependencies
+
 bash
 Copy
 Edit
 npm install
-3. Set up environment variables
+
+### 3. Set up environment variables
+
 Copy the example file:
 
 bash
@@ -50,14 +55,16 @@ Edit
 cp .env.example .env
 Fill in the values inside .env.
 
-4. Run the app
+### 4. Run the app
+
 bash
 Copy
 Edit
 npm run dev
 The app will be running at: http://localhost:3000
 
-🐳 Run with Docker
+### 5. 🐳 Run with Docker
+
 Make sure Docker and Docker Compose are installed.
 
 bash
@@ -68,7 +75,8 @@ The app will be live on: http://localhost:3000
 
 MongoDB runs in a separate container.
 
-📁 Environment Variables
+### 6. 📁 Environment Variables
+
 Create a .env file using the structure below:
 
 env
@@ -96,7 +104,7 @@ EMAIL_PORT=465
 💡 Use a Gmail App Password instead of your main Gmail password.
 
 
-📬 Support
+### 📬 Support
 For any queries or help, feel free to reach out:
 
 📧 Email: elegance@gmail.com
