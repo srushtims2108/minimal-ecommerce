@@ -34,39 +34,31 @@ A modern full-stack e-commerce web application built with **Next.js App Router**
 
 ## ⚙️ Local Development
 
- ✅ 1. Clone the repository
+### ✅ 1. Clone the repository
 
 git clone https://github.com/srushtims2108/minimal-ecommerce.git
 cd minimal-ecommerce
 
-
 ✅ 2. Install dependencies
-
 npm install
 
-
 ✅ 3. Configure environment variables
-
 Copy the example file:
 cp .env.example .env
 Then fill in your actual credentials inside the .env file.
 
 
 ✅ 4. Run the app (development mode)
-
 npm run dev
-App will run at: http://localhost:3000
+The app will run at: http://localhost:3000
 
 
 🐳 Docker Setup (Production-ready)
-
-Ensure Docker and Docker Compose are installed.
-
+Make sure you have Docker and Docker Compose installed.
 
 ✅ a. Run both MongoDB and the app
 
 docker-compose up --build
-
 This will:
 
 Spin up a MongoDB container
@@ -75,11 +67,8 @@ Run the Next.js app in a container
 
 Auto-connect the database via environment variables
 
-
-
 🛠️ Environment Variables
-
-Create a .env file using the following format:
+Create a .env file using the following structure:
 
 MONGODB_URI=mongodb://mongo:27017/ecommerce
 
@@ -100,8 +89,7 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=465
-⚠️ Use a Gmail App Password instead of your regular Gmail password.
-
+⚠️ Important: Use a Gmail App Password instead of your regular Gmail password.
 
 📦 Project Structure
 .
@@ -114,9 +102,17 @@ EMAIL_PORT=465
 ├── docker-compose.yml    # Docker orchestration
 ├── Dockerfile            # Docker image build
 └── README.md             # This file
-
 📧 Order Confirmation Email
-After payment, an email is automatically sent to the user with the order details.
+After successful payment, an email is automatically sent to the user with order details using Gmail SMTP and Nodemailer.
 
 📦 Production Deployment
-You can deploy using any Docker-compatible platform (Render, Railway, DigitalOcean, etc.), or push it to Vercel and configure the environment variables there.
+You can deploy this app using any Docker-compatible platform:
+
+Railway
+
+Render
+
+DigitalOcean
+
+Or push to Vercel and configure your environment variables through their dashboard.
+
