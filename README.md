@@ -40,23 +40,17 @@ A modern full-stack e-commerce web application built with **Next.js App Router**
 git clone https://github.com/srushtims2108/minimal-ecommerce.git
 cd minimal-ecommerce
 ✅ 2. Install dependencies
-bash
-Copy
-Edit
+
 npm install
 ✅ 3. Configure environment variables
 Copy the example file:
 
-bash
-Copy
-Edit
+
 cp .env.example .env
 Then fill in your actual credentials inside the .env file.
 
 ✅ 4. Run the app (development mode)
-bash
-Copy
-Edit
+
 npm run dev
 The app will run at: http://localhost:3000
 
@@ -64,9 +58,7 @@ The app will run at: http://localhost:3000
 Make sure you have Docker and Docker Compose installed.
 
 ✅ Run both MongoDB and the app
-bash
-Copy
-Edit
+
 docker-compose up --build
 This will:
 
@@ -79,9 +71,7 @@ Automatically connect the database via environment variables
 🛠️ Environment Variables
 Create a .env file using the following structure:
 
-env
-Copy
-Edit
+
 MONGODB_URI=mongodb://mongo:27017/ecommerce
 
 EMAIL_USER=your_email@gmail.com
@@ -117,6 +107,4 @@ DigitalOcean
 
 Or push to Vercel and configure your environment variables through their dashboard.
 
-perl
-Copy
-Edit
+
