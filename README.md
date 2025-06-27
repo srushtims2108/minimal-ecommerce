@@ -34,50 +34,54 @@ A modern full-stack e-commerce web application built with **Next.js App Router**
 
 ## ⚙️ Local Development
 
-
 ### ✅ 1. Clone the repository
 
+```bash
 git clone https://github.com/srushtims2108/minimal-ecommerce.git
 cd minimal-ecommerce
-
-
 ✅ 2. Install dependencies
+bash
+Copy
+Edit
 npm install
-
-
-
 ✅ 3. Configure environment variables
 Copy the example file:
+
+bash
+Copy
+Edit
 cp .env.example .env
 Then fill in your actual credentials inside the .env file.
 
-
-
-
 ✅ 4. Run the app (development mode)
+bash
+Copy
+Edit
 npm run dev
 The app will run at: http://localhost:3000
-
-
-
 
 🐳 Docker Setup (Production-ready)
 Make sure you have Docker and Docker Compose installed.
 
-✅ a. Run both MongoDB and the app
+✅ Run both MongoDB and the app
+bash
+Copy
+Edit
 docker-compose up --build
-
 This will:
+
 Spin up a MongoDB container
+
 Run the Next.js app in a container
-Auto-connect the database via environment variables
 
-
-
+Automatically connect the database via environment variables
 
 🛠️ Environment Variables
 Create a .env file using the following structure:
 
+env
+Copy
+Edit
 MONGODB_URI=mongodb://mongo:27017/ecommerce
 
 EMAIL_USER=your_email@gmail.com
@@ -99,18 +103,20 @@ EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=465
 ⚠️ Important: Use a Gmail App Password instead of your regular Gmail password.
 
-
-
-
 📧 Order Confirmation Email
 After successful payment, an email is automatically sent to the user with order details using Gmail SMTP and Nodemailer.
 
-
-
 📦 Production Deployment
 You can deploy this app using any Docker-compatible platform:
+
 Railway
+
 Render
+
 DigitalOcean
+
 Or push to Vercel and configure your environment variables through their dashboard.
 
+perl
+Copy
+Edit
