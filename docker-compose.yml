@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6.0
+    restart: always
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build: .
+    container_name: next-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+    working_dir: /app
+    command: npm run dev
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/ecommerce
+      - NEXTAUTH_SECRET=332c5f69b24c4fa392853daeb8e9b956eb8d46e6450969717cad05680a6b5500
+      - NEXTAUTH_URL=http://localhost:3000
+      - EMAIL_USER=srushtims2005@gmail.com
+      - EMAIL_PASS=judwowfkbfjdimop
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=465
+
+volumes:
+  mongo-data:
