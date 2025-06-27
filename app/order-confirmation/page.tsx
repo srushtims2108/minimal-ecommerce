@@ -4,18 +4,29 @@ import { useSearchParams } from "next/navigation";
 
 export default function OrderConfirmationPage() {
   const searchParams = useSearchParams();
-  const email = searchParams.get("email");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
-      <h1 className="text-3xl font-bold mb-4">🎉 Thank you for placing your order!</h1>
-      <p className="text-lg mb-2 text-gray-800">Your order has been successfully placed.</p>
-      <p className="text-lg text-gray-700">
-        Your confirmation order has been shared to your{" "}
-        <span className="font-semibold text-black">
-          {email || "[email not available]"}
-        </span>.
-      </p>
+    <div
+      className="flex items-center justify-center min-h-screen p-6 bg-cover bg-center"
+      style={{ backgroundImage: 'url("/elegance-bg.jpg")' }}
+    >
+      <div className="bg-white/90 backdrop-blur-sm p-10 rounded-2xl shadow-xl text-center max-w-md w-full">
+        <h1 className="text-3xl font-extrabold text-blue-700 mb-4">
+          🎉 Thank you for your order!
+        </h1>
+
+        <p className="text-lg text-gray-800 mb-2">
+          Your order with <span className="italic font-semibold text-blue-700">Elegance</span> has been placed.
+        </p>
+
+        <p className="text-md text-gray-700 mb-1">
+          We’re getting it ready for you.
+        </p>
+
+        <p className="text-md text-gray-700 mt-4">
+          A confirmation email has been sent to your inbox.
+        </p>
+      </div>
     </div>
   );
 }

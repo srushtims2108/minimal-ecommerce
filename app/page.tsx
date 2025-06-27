@@ -1,65 +1,77 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+  const router = useRouter();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await signIn('credentials', {
-      redirect: false,
       email,
       password,
+      redirect: false,
     });
 
     if (res?.ok) {
-      router.push('/dashboard'); // ✅ Redirect after login
+      router.push('/products/blue-hoodie');
     } else {
-      setErrorMsg('Invalid email or password');
+      alert('Invalid credentials');
     }
   };
 
+  if (!isHydrated) return null; // Avoid mismatch during hydration
+
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      {errorMsg && <p className="text-red-500 mb-2">{errorMsg}</p>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-          className="block mb-2 p-2 w-full border"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-          className="block mb-2 p-2 w-full border"
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
-          Sign In
-        </button>
-      </form>
-      <p className="mt-4 text-sm">
-        Don’t have an account?{' '}
-        <a href="/signup" className="text-blue-600">
-          Sign up
-        </a>
-        <br />
-        <a href="/forgot-password" className="text-blue-600">
-          Forgot Password?
-        </a>
-      </p>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center"
+      style={{ backgroundImage: "url('/elegance-bg.jpg')" }} // make sure this is in /public
+    >
+      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg max-w-md w-full">
+        <h1 className="text-4xl font-bold text-center text-blue-600 mb-2">Elegance</h1>
+        <h2 className="text-center text-gray-700 mb-6">where style meets embrace</h2>
+        <h2 className="text-xl font-semibold text-center mb-4">Welcome!</h2>
+
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email ID"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <div className="flex justify-between text-sm mt-4 px-1 text-blue-600">
+          <a href="/forgot-password" className="hover:underline">Forgot Password?</a>
+          <a href="/signup" className="hover:underline">New user? Sign Up</a>
+        </div>
+      </div>
     </div>
   );
 }

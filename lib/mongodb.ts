@@ -1,44 +1,23 @@
 // lib/mongodb.ts
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://mongo:27017/ecommerce';
+const MONGODB_URI = process.env.MONGODB_URI!;
+if (!MONGODB_URI) throw new Error('Please define the MONGODB_URI environment variable');
 
+let cached = (global as any).mongoose || { conn: null, promise: null };
 
+async function dbConnect() {
+  if (cached.conn) return cached.conn;
 
-if (!MONGODB_URI) {
-  throw new Error('⚠️ Please define the MONGODB_URI environment variable');
-}
-
-interface MongooseGlobal {
-  conn: Mongoose | null;
-  promise: Promise<Mongoose> | null;
-}
-
-const globalWithMongoose = global as typeof globalThis & {
-  mongooseGlobal: MongooseGlobal;
-};
-
-if (!globalWithMongoose.mongooseGlobal) {
-  globalWithMongoose.mongooseGlobal = {
-    conn: null,
-    promise: null,
-  };
-}
-
-async function dbConnect(): Promise<Mongoose> {
-  if (globalWithMongoose.mongooseGlobal.conn) {
-    return globalWithMongoose.mongooseGlobal.conn;
+  if (!cached.promise) {
+    const opts = { bufferCommands: false };
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => mongoose);
   }
 
-  if (!globalWithMongoose.mongooseGlobal.promise) {
-    globalWithMongoose.mongooseGlobal.promise = mongoose.connect(MONGODB_URI, {
-      dbName: 'ecommerce',
-    });
-  }
+  cached.conn = await cached.promise;
+  (global as any).mongoose = cached;
 
-  globalWithMongoose.mongooseGlobal.conn = await globalWithMongoose.mongooseGlobal.promise;
-  console.log('✅ Connected to MongoDB');
-  return globalWithMongoose.mongooseGlobal.conn;
+  return cached.conn;
 }
 
 export default dbConnect;

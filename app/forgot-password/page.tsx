@@ -25,11 +25,31 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <form onSubmit={handleReset} className="p-6 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
-      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required className="block mb-2 p-2 w-full border" />
-      <input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="password" placeholder="New Password" required className="block mb-2 p-2 w-full border" />
-      <button type="submit" className="w-full bg-yellow-500 text-white p-2">Reset</button>
-    </form>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: "url('/elegance-bg.jpg')" }}
+    >
+      <form onSubmit={handleReset} className="p-6 max-w-md w-full bg-white/90 backdrop-blur rounded shadow">
+        <h1 className="text-2xl font-bold mb-4 text-center">Reset Password</h1>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+          className="block mb-2 p-2 w-full border rounded"
+        />
+        <input
+          value={newPassword}
+          onChange={e => setNewPassword(e.target.value)}
+          type="password"
+          placeholder="New Password"
+          required
+          className="block mb-4 p-2 w-full border rounded"
+        />
+        <button type="submit" className="w-full bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 transition">
+          Reset
+        </button>
+      </form>
+    </div>
   );
 }

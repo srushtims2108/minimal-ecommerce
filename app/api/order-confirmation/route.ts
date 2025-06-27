@@ -1,30 +1,20 @@
-// app/api/order-confirmation/route.ts
-import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendOrderConfirmationEmail } from "@/app/utils/sendOrderConfirmationEmail";
+
 
 export async function POST(req: Request) {
-  const { to, orderId, amount } = await req.json();
+  const body = await req.json();
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // App Password, not your Gmail login
-    },
-  });
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject: "Order Confirmation",
-    text: `Your order #${orderId} of ₹${amount} has been placed successfully.`,
+  const userEmail = body.to;
+  const orderDetails = {
+    orderId: body.orderId,
+    amount: body.amount,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    return NextResponse.json({ success: true });
+    await sendOrderConfirmationEmail(userEmail, orderDetails);
+    return new Response(JSON.stringify({ message: "Email sent" }), { status: 200 });
   } catch (error) {
     console.error("Email error:", error);
-    return NextResponse.json({ success: false, error });
+    return new Response(JSON.stringify({ message: "Failed to send email" }), { status: 500 });
   }
 }

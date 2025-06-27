@@ -1,21 +1,30 @@
-import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import User from '@/models/user';
-import bcrypt from 'bcryptjs';
+import  dbConnect  from "@/lib/mongodb";
+import User from "@/models/user";
+import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
     await dbConnect();
+    const { email, password } = await req.json();
 
-    const existing = await User.findOne({ email });
-    if (existing) return NextResponse.json({ error: 'User exists' }, { status: 400 });
+    if (!email || !password) {
+      return NextResponse.json({ message: "Missing fields" }, { status: 400 });
+    }
 
-    const hash = await bcrypt.hash(password, 10);
-    await User.create({ email, password: hash });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json({ message: "User already exists" }, { status: 409 });
+    }
 
-    return NextResponse.json({ message: 'Created' }, { status: 201 });
-  } catch (e) {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({ email, password: hashedPassword });
+    await user.save();
+
+    return NextResponse.json({ message: "User created" }, { status: 201 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

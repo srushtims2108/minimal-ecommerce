@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Minimal E-Commerce
 
-## Getting Started
+A minimal and modern full-stack e-commerce web application built with **Next.js App Router**, **TypeScript**, **MongoDB**, and **Tailwind CSS**. The app supports user authentication via Google, a dynamic cart, secure payment with **Razorpay**, and order confirmation emails via **Gmail SMTP**.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🔐 Google OAuth login with NextAuth
+- 🛍️ Product listing with add-to-cart functionality
+- 💾 Cart stored in `localStorage`
+- 💳 Razorpay integration for secure checkout
+- 📧 Order confirmation email after successful payment
+- 🧾 Order summary and success page
+- 🔐 Protected purchase access for authenticated users
+- 🐳 Fully Dockerized (MongoDB + App)
+
+---
+
+## 🧪 Tech Stack
+
+- **Framework**: Next.js App Router (TypeScript)
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB
+- **Authentication**: NextAuth (Google)
+- **Payments**: Razorpay
+- **Email Service**: Nodemailer + Gmail SMTP
+- **Containerization**: Docker + Docker Compose
+
+---
+
+## ⚙️ Local Development
+
+### 1. Clone the repository
 
 ```bash
+git clone https://github.com/YOUR_USERNAME/minimal-ecommerce.git
+cd minimal-ecommerce
+2. Install dependencies
+bash
+Copy
+Edit
+npm install
+3. Set up environment variables
+Copy the example file:
+
+bash
+Copy
+Edit
+cp .env.example .env
+Fill in the values inside .env.
+
+4. Run the app
+bash
+Copy
+Edit
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The app will be running at: http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🐳 Run with Docker
+Make sure Docker and Docker Compose are installed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+bash
+Copy
+Edit
+docker-compose up --build
+The app will be live on: http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+MongoDB runs in a separate container.
 
-## Learn More
+📁 Environment Variables
+Create a .env file using the structure below:
 
-To learn more about Next.js, take a look at the following resources:
+env
+Copy
+Edit
+MONGODB_URI=mongodb://localhost:27017/ecommerce
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_gmail_app_password
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
-## Deploy on Vercel
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_string
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+💡 Use a Gmail App Password instead of your main Gmail password.
+
+
+📬 Support
+For any queries or help, feel free to reach out:
+
+📧 Email: elegance@gmail.com
+
+📞 Phone: +91-9876XXXXXX
