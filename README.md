@@ -35,7 +35,7 @@ A modern full-stack e-commerce web application built with **Next.js App Router**
 ## ⚙️ Local Development
 ```bash
 
-### ✅ 1. Clone the repository
+✅ 1. Clone the repository
 
 git clone https://github.com/srushtims2108/minimal-ecommerce.git
 cd minimal-ecommerce
